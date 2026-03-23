@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0D1B2A">
+<title>Styl Doradcy · OMNIRES</title>
+<style>
+:root{
+  --navy:#0D1B2A;--navy2:#1A2E42;
+  --gold:#B8964A;--gold2:#D4AF6E;
+  --cream:#F5F0E8;--cream2:#EDE6D8;--cream3:#E0D8CC;
+  --text:#1A1A1A;--text2:#5A5A5A;--text3:#888;
+  --white:#FFFFFF;
+  --C:#B8312F;--Cbg:#FBF0EF;
+  --S:#B8820A;--Sbg:#FBF5E6;
+  --F:#1E6B3C;--Fbg:#EBF5EF;
+  --M:#1D5490;--Mbg:#EBF2FB;
+  --r:14px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{min-height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--navy);color:var(--text);overscroll-behavior:none;}
+
+.screen{display:none;min-height:100vh;}
+.screen.active{display:flex;flex-direction:column;}
+
+/* ── INTRO ── */
+#si{background:var(--navy);align-items:center;justify-content:flex-end;position:relative;overflow:hidden;}
+.ibg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(184,150,74,.18) 0%,transparent 70%);}
+.ideco{position:absolute;top:0;left:0;right:0;height:52vh;display:flex;align-items:center;justify-content:center;}
+.icirc{width:min(300px,85vw);height:min(300px,85vw);border-radius:50%;border:1px solid rgba(184,150,74,.22);position:relative;display:flex;align-items:center;justify-content:center;}
+.icirc::before{content:'';position:absolute;width:75%;height:75%;border-radius:50%;border:1px solid rgba(184,150,74,.14);}
+.icirc::after{content:'';position:absolute;width:50%;height:50%;border-radius:50%;border:1px solid rgba(184,150,74,.1);}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:44%;height:44%;z-index:2;}
+.qc{border-radius:5px;opacity:.88;}
+
+.icontent{position:relative;z-index:2;width:100%;background:var(--cream);border-radius:24px 24px 0 0;padding:30px 22px 44px;}
+.ieyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600;}
+.ititle{font-size:clamp(26px,7.5vw,36px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:14px;letter-spacing:-.02em;}
+.idesc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;}
+.imeta{display:flex;gap:20px;margin-bottom:26px;}
+.mitem{display:flex;flex-direction:column;gap:2px;}
+.mnum{font-size:28px;font-weight:700;color:var(--navy);letter-spacing:-.03em;}
+.mlbl{font-size:11px;color:var(--text3);}
+.sbtn{width:100%;padding:18px;background:var(--navy);color:var(--cream);border:none;border-radius:var(--r);font-size:15px;font-weight:600;cursor:pointer;position:relative;transition:transform .15s;}
+.sbtn:active{transform:scale(.98);}
+.sbtn::after{content:'→';position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:18px;}
+
+/* ── QUESTION ── */
+#sq{background:var(--cream);flex-direction:column;}
+.qtop{background:var(--navy);padding:18px 20px 22px;flex-shrink:0;}
+.qnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.qback{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.qback:disabled{opacity:.25;cursor:default;}
+.qct{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:.06em;}
+.pwrap{height:2px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;}
+.pfill{height:100%;background:var(--gold);border-radius:999px;transition:width .35s cubic-bezier(.4,0,.2,1);}
+
+.qbody{padding:22px 20px 12px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.qtag{display:inline-flex;align-items:center;gap:5px;background:rgba(184,150,74,.11);border:1px solid rgba(184,150,74,.22);border-radius:999px;padding:5px 12px;font-size:11px;color:var(--gold);margin-bottom:14px;}
+.qtext{font-size:clamp(18px,5vw,24px);font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:8px;letter-spacing:-.01em;}
+.qscene{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:22px;font-style:italic;}
+.opts{display:flex;flex-direction:column;gap:9px;padding-bottom:100px;}
+.opt{padding:15px 16px;background:white;border:1.5px solid transparent;border-radius:var(--r);cursor:pointer;font-size:14px;color:var(--text);line-height:1.5;transition:all .16s;display:flex;align-items:flex-start;gap:11px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.opt:active{transform:scale(.99);}
+.oltr{width:24px;height:24px;min-width:24px;border-radius:50%;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text2);transition:all .16s;}
+.opt.sC{border-color:var(--C);background:var(--Cbg);}
+.opt.sC .oltr{background:var(--C);color:white;}
+.opt.sS{border-color:var(--S);background:var(--Sbg);}
+.opt.sS .oltr{background:var(--S);color:white;}
+.opt.sF{border-color:var(--F);background:var(--Fbg);}
+.opt.sF .oltr{background:var(--F);color:white;}
+.opt.sM{border-color:var(--M);background:var(--Mbg);}
+.opt.sM .oltr{background:var(--M);color:white;}
+
+.qfoot{position:fixed;bottom:0;left:0;right:0;padding:12px 20px 30px;background:var(--cream);border-top:1px solid var(--cream2);}
+.nbtn{width:100%;padding:17px;background:var(--navy);color:white;border:none;border-radius:var(--r);font-size:15px;font-weight:600;cursor:pointer;transition:all .16s;position:relative;}
+.nbtn:disabled{background:#C5BFB5;cursor:default;}
+.nbtn:not(:disabled):active{transform:scale(.98);}
+.nbtn::after{content:'→';position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--gold);}
+.nbtn:disabled::after{display:none;}
+
+/* ── LOADING ── */
+#sl{background:var(--navy);align-items:center;justify-content:center;flex-direction:column;gap:22px;}
+.lring{width:56px;height:56px;border:2px solid rgba(184,150,74,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ltxt{font-size:17px;color:rgba(245,240,232,.65);font-style:italic;}
+
+/* ── RESULT ── */
+#sr{background:var(--cream);flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.rhero{padding:44px 22px 32px;text-align:center;}
+.riconw{width:78px;height:78px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;}
+.ricon{font-size:26px;color:white;font-weight:700;}
+.reyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;font-weight:600;}
+.rname{font-size:clamp(26px,7vw,36px);font-weight:700;color:var(--navy);line-height:1.1;margin-bottom:5px;letter-spacing:-.02em;}
+.rsub{font-size:13px;color:var(--text2);margin-bottom:18px;}
+.rtags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.rtag{padding:5px 12px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em;}
+
+.rsec{padding:0 20px 22px;}
+.stitle{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--cream3);}
+
+.blist{display:flex;flex-direction:column;gap:9px;}
+.brow{display:flex;flex-direction:column;gap:5px;}
+.bhead{display:flex;justify-content:space-between;align-items:center;}
+.bname{font-size:13px;color:var(--navy);font-weight:600;}
+.bpct{font-size:12px;color:var(--text3);}
+.bbg{height:6px;background:var(--cream2);border-radius:999px;overflow:hidden;}
+.bfill{height:100%;border-radius:999px;width:0%;transition:width .9s cubic-bezier(.4,0,.2,1);}
+
+.qcard{background:var(--navy);border-radius:var(--r);padding:20px;}
+.qmark{font-size:44px;color:var(--gold);opacity:.35;line-height:.7;margin-bottom:8px;font-weight:700;}
+.qtext2{font-size:14px;color:rgba(255,255,255,.82);line-height:1.7;font-style:italic;}
+
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.scard{background:white;border-radius:var(--rs);padding:13px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.slbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:7px;}
+.sitem{font-size:12px;color:var(--text2);padding:4px 0;border-top:1px solid var(--cream2);line-height:1.4;}
+.sitem:first-of-type{border-top:none;padding-top:0;}
+
+.dlist{display:flex;flex-direction:column;gap:7px;}
+.ditem{background:white;border-radius:var(--rs);padding:13px 14px;font-size:13px;color:var(--text2);line-height:1.5;display:flex;gap:9px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.darrow{color:var(--gold);font-size:13px;flex-shrink:0;margin-top:2px;}
+
+.cgrid{display:flex;flex-direction:column;gap:8px;}
+.ccard{border-radius:var(--rs);padding:13px 15px;}
+.cclbl{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.cctext{font-size:13px;color:var(--text2);line-height:1.5;}
+
+.ract{padding:4px 20px 50px;display:flex;flex-direction:column;gap:9px;}
+.abtn{width:100%;padding:16px;border:none;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;transition:transform .15s;}
+.abtn:active{transform:scale(.98);}
+.abtn-sec{background:white;color:var(--navy);border:1.5px solid var(--cream3);}
+
+@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.a{animation:fu .32s ease both;}
+.a1{animation-delay:.05s;}.a2{animation-delay:.11s;}.a3{animation-delay:.17s;}.a4{animation-delay:.23s;}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="screen" id="sl">
+  <div class="lring"></div>
+  <div class="ltxt">Analizuję Twój profil…</div>
+</div>
+
+<!-- INTRO -->
+<div class="screen active" id="si">
+  <div class="ibg"></div>
+  <div class="ideco">
+    <div class="icirc">
+      <div class="qgrid">
+        <div class="qc" style="background:#B8312F"></div>
+        <div class="qc" style="background:#B8820A"></div>
+        <div class="qc" style="background:#1E6B3C"></div>
+        <div class="qc" style="background:#1D5490"></div>
+      </div>
+    </div>
+  </div>
+  <div class="icontent">
+    <div class="ieyebrow">OMNIRES · Szkolenie PCE</div>
+    <h1 class="ititle">Jaki masz styl osobowości jako doradca?</h1>
+    <p class="idesc">10 sytuacji z codziennej pracy w showroomie. Wybieraj szczerze — pierwsza myśl jest zwykle najtrafniejsza.</p>
+    <div class="imeta">
+      <div class="mitem"><span class="mnum">10</span><span class="mlbl">pytań</span></div>
+      <div class="mitem"><span class="mnum">4</span><span class="mlbl">style</span></div>
+      <div class="mitem"><span class="mnum">~4'</span><span class="mlbl">czas</span></div>
+    </div>
+    <button class="sbtn" onclick="startTest()">Rozpocznij test</button>
+  </div>
+</div>
+
+<!-- QUESTION -->
+<div class="screen" id="sq">
+  <div class="qtop">
+    <div class="qnav">
+      <button class="qback" id="btn-back" onclick="prevQ()" disabled>←</button>
+      <span class="qct" id="qct">1 / 10</span>
+      <div style="width:36px"></div>
+    </div>
+    <div class="pwrap"><div class="pfill" id="prog" style="width:0%"></div></div>
+  </div>
+  <div class="qbody" id="qbody"></div>
+  <div class="qfoot">
+    <button class="nbtn" id="btn-next" onclick="nextQ()" disabled>Wybierz odpowiedź</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="sr"></div>
+
+<script>
+var Q=[
+  {t:"Klient wchodzi do showroomu. Co robisz jako pierwsze?",
+   s:"Środek tygodnia, umiarkowany ruch. Klient wchodzi i rozgląda się.",
+   o:[
+    {t:"Natychmiast podchodzę i zaczynam rozmowę — lubię nawiązywać kontakt od razu",y:"S"},
+    {t:"Obserwuję chwilę i oceniam sytuację — chcę wiedzieć czego szuka zanim podejdę",y:"M"},
+    {t:"Podchodzę konkretnie: „Dzień dobry, w czym mogę pomóc?" Czas to wartość",y:"C"},
+    {t:"Daję klientowi przestrzeń i jestem w pobliżu gdy będzie potrzebował",y:"F"}
+  ]},
+  {t:"Architekt pyta o certyfikaty i parametry techniczne modelu, których nie znasz.",
+   s:"Architekt potrzebuje konkretnych danych do projektu — nie masz ich w głowie.",
+   o:[
+    {t:"Szczerze mówię, że sprawdzę i wrócę z dokładną odpowiedzią — nie podaję niepewnych danych",y:"M"},
+    {t:"Szybko proponuję najbliższy odpowiednik — nie zatrzymuję tempa rozmowy",y:"C"},
+    {t:"Przepraszam i zanim odpowiem, upewniam się że mam rację",y:"F"},
+    {t:"Utrzymuję dobry nastrój rozmowy i obiecuję wrócić z detalami — nie chcę tworzyć napięcia",y:"S"}
+  ]},
+  {t:"Masz napięty dzień — kilka klientów jednocześnie, telefon dzwoni.",
+   s:"Wtorek rano, showroom pełny, manager nieobecny.",
+   o:[
+    {t:"Przejmuję kontrolę — sam/a organizuję kolejność i działam dynamicznie",y:"C"},
+    {t:"Spokojnie obsługuję kolejno — nie daję po sobie poznać presji",y:"F"},
+    {t:"Stresuje mnie chaos, staram się jak najszybciej uprościć sytuację",y:"M"},
+    {t:"Energetyzuję się — dużo ludzi to moje środowisko, wchodzę na wyższe obroty",y:"S"}
+  ]},
+  {t:"Klient jest wyraźnie niezadowolony z poprzedniej wizyty w showroomie.",
+   s:"Klient mówi, że poprzednio ktoś obiecał rzeczy, których nie dotrzymał.",
+   o:[
+    {t:"Słucham uważnie i chcę dokładnie zrozumieć co poszło źle — to ważne",y:"M"},
+    {t:"Szybko przejmuję odpowiedzialność i proponuję konkretne rozwiązanie",y:"C"},
+    {t:"Empatyzuję i staram się rozładować napięcie — relacja jest najważniejsza",y:"S"},
+    {t:"Uspokajam, wyrażam zrozumienie i staram się nie eskalować konfliktu",y:"F"}
+  ]},
+  {t:"Klient prosi o zestawienie propozycji do łazienki. Jak je przygotowujesz?",
+   s:"Nowy dom. Klient chce mieć materiały do przemyślenia w domu.",
+   o:[
+    {t:"Szczegółowe i estetyczne — z parametrami, opisem i spójnym układem",y:"M"},
+    {t:"Szybko i konkretnie — kluczowe opcje bez zbędnych ozdobników",y:"C"},
+    {t:"Dodaję notatki i zdjęcia inspiracji — chcę żeby poczuł klimat wyboru",y:"S"},
+    {t:"Proste i przejrzyste — bez przesadzeń, łatwe do przeczytania",y:"F"}
+  ]},
+  {t:"Klient mówi, że cena jest za wysoka i zna tańszą opcję u konkurencji.",
+   s:"Showroom premium — klient porównuje was z tańszą ofertą.",
+   o:[
+    {t:"Spokojnie tłumaczę wartość — jeśli klient nie jest przekonany, akceptuję to",y:"F"},
+    {t:"Wzbudzam emocje — pokazuję wyjątkowość, opowiadam historię produktu",y:"S"},
+    {t:"Konkretnie argumentuję: jakość, trwałość, serwis, realna różnica w czasie",y:"C"},
+    {t:"Przygotowuję szczegółowe porównanie — liczby, certyfikaty, gwarancje",y:"M"}
+  ]},
+  {t:"Po godzinnej wizycie klient mówi: „Muszę to jeszcze przemyśleć."",
+   s:"Włożyłeś/aś w tę rozmowę dużo zaangażowania. Klient wychodzi bez decyzji.",
+   o:[
+    {t:"Lekka frustracja — dałem/am z siebie wszystko, liczyłem/am na zamknięcie",y:"C"},
+    {t:"Spokojnie akceptuję — wysyłam przejrzyste podsumowanie i czekam",y:"F"},
+    {t:"Trochę smutku — zainwestowałem/am się relacyjnie, liczyłem/am na decyzję dziś",y:"S"},
+    {t:"Ulga — dam mu czas i przygotuję dokładniejsze materiały do decyzji",y:"M"}
+  ]},
+  {t:"Manager mówi, że Twoje rozmowy z klientami trwają za długo.",
+   s:"Feedback na team meetingu. Twoje wyniki sprzedażowe są dobre.",
+   o:[
+    {t:"Biorę feedback poważnie i analizuję gdzie mogę być bardziej efektywny/a",y:"M"},
+    {t:"Wewnętrznie się nie zgadzam — jakość relacji wymaga czasu",y:"S"},
+    {t:"Akceptuję cicho — nie lubię konfrontacji, ale nie zmienię stylu od razu",y:"F"},
+    {t:"Bezpośrednio wyrażam swoje zdanie — dobre wyniki potwierdzają metodę",y:"C"}
+  ]},
+  {t:"Architekt pisze w piątek 16:30, że potrzebuje materiałów na jutro rano.",
+   s:"Koniec tygodnia, masz plany. To ważny partner.",
+   o:[
+    {t:"Zostaję lub biorę pracę do domu — nie można zawieść kluczowego partnera",y:"M"},
+    {t:"Pytam co jest absolutnie niezbędne i robię minimum żeby dotrzymać terminu",y:"F"},
+    {t:"Dzwonię, ustalam co dokładnie potrzebuje i negocjuję realny termin",y:"C"},
+    {t:"Oczywiście! Robię szybko z energią — może nieperfekcyjnie, ale z sercem",y:"S"}
+  ]},
+  {t:"Co daje Ci prawdziwą satysfakcję po dniu pracy w showroomie?",
+   s:"Koniec długiego dnia. Co sprawia, że wracasz do domu z dobrym uczuciem?",
+   o:[
+    {t:"Kilka głębokich, autentycznych rozmów — poczucie prawdziwego kontaktu z ludźmi",y:"S"},
+    {t:"Zamknięte transakcje i zrealizowane cele — konkretny, widoczny wynik",y:"C"},
+    {t:"Wszystko było perfekcyjnie przygotowane i rzetelnie wykonane",y:"M"},
+    {t:"Harmonijny dzień bez napięć — każdy klient wyszedł zadowolony",y:"F"}
+  ]}
+];
+
+var TYPES={
+  C:{name:"Władczy Choleryk",sub:"Doradca nastawiony na wynik i działanie",
+     col:"#B8312F",bg:"#FBF0EF",tags:["Ekstraweryk","Zadaniowy","Dynamiczny"],ltr:"C",
+     quote:"Masz naturalną energię przywódczą — prowadzisz klienta pewnie i konkretnie. Twoja siła to inicjatywa i zdolność do zamykania kontaktu. Klienci czują, że jesteś w kontroli. To rzadka i cenna cecha w showroomie premium.",
+     str:[
+       {lbl:"Dajesz klientowi",items:["Pewność i decyzyjność","Szybkie rekomendacje","Inicjatywę — nie czekasz","Konkretny następny krok"]},
+       {lbl:"Twój język",items:["„Mam jedno rozwiązanie."","„To najlepszy wybór."","„Kiedy potrzebujecie dostawy?"","Konkretnie i bez owijania"]}
+     ],
+     dev:["Klienci Flegmatycy potrzebują przestrzeni — nie bierz tego jako oporu","Słuchaj aktywnie zanim zarekomendujesz — nie każdy chce szybkiej decyzji","Cierpliwość przy wątpliwościach to premium, nie słabość","Buduj relację po zamknięciu — lojalność rośnie między transakcjami"],
+     nat:"Czerwony Choleryk, Deweloper — cenią czas, konkrety i wynik",
+     chal:"Spokojny Flegmatyk — potrzebuje przestrzeni i spokoju, nie dynamiki"},
+  S:{name:"Towarzyski Sangwinik",sub:"Doradca budujący relację i emocję",
+     col:"#B8820A",bg:"#FBF5E6",tags:["Ekstraweryk","Relacyjny","Entuzjastyczny"],ltr:"S",
+     quote:"Twoja wyjątkowa zdolność to budowanie atmosfery i emocjonalnego zaangażowania. W showroomie premium klient czuje się u Ciebie wyjątkowo. Potrafisz sprawić, że zakup armatury staje się przeżyciem. Pamiętaj: za ciepłem musi iść prowadzenie.",
+     str:[
+       {lbl:"Dajesz klientowi",items:["Ciepło i autentyczność","Narrację sensoryczną","Atmosferę i zachwyt","Zaraźliwą energię"]},
+       {lbl:"Twój język",items:["„Proszę dotknąć — to uczucie…"","„Ta kolekcja ma piękną historię."","„To był najlepszy wybór."","Obrazowy i inspiracyjny"]}
+     ],
+     dev:["Trenuj aktywne domknięcie — każda wizyta musi mieć następny krok","Uważaj na zbyt długie rozmowy — klient premium ceni też precyzję","Przy Niebieskim i Czerwonym — skróć narrację, daj fakty","Organizacja: notatki po wizycie i follow-up w 24h to Twój priorytet"],
+     nat:"Żółty Sangwinik, Klient Indywidualny — kupują emocją i zaufaniem",
+     chal:"Perfekcyjny Melancholik — chce faktów i danych, nie opowieści"},
+  F:{name:"Spokojny Flegmatyk",sub:"Doradca budujący zaufanie i harmonię",
+     col:"#1E6B3C",bg:"#EBF5EF",tags:["Introweryk","Relacyjny","Cierpliwy"],ltr:"F",
+     quote:"Twoja siła to spokój, wiarygodność i prawdziwe słuchanie. Klienci czują przy Tobie bezpieczeństwo — i wracają właśnie dlatego. Jesteś ekspertem od budowania trwałego zaufania. Twoje wyzwanie to wzięcie inicjatywy, gdy jej nie ma.",
+     str:[
+       {lbl:"Dajesz klientowi",items:["Poczucie bezpieczeństwa","Aktywne słuchanie","Rzetelność — dotrzymujesz","Spokój w trudnych chwilach"]},
+       {lbl:"Twój język",items:["„Rozumiem — proszę powiedzieć więcej."","„Przygotuję zestawienie spokojnie."","„Jestem dostępny na pytania."","Uważny i bez presji"]}
+     ],
+     dev:["Ćwicz inicjatywę — nie czekaj aż klient poprosi, zaproponuj sam/a","Aktywne domknięcie to Twój słaby punkt — krok do przodu to Twoja praca","Przy Czerwonym Chołeryku: przyspiesz tempo, bądź bardziej bezpośredni/a","Wyrażaj swoją opinię — klient premium oczekuje rekomendacji"],
+     nat:"Zielony Flegmatyk, ostrożny Klient Indywidualny — cenią spokój i rzetelność",
+     chal:"Władczy Choleryk — oczekuje energii, decyzji i szybkiego tempa"},
+  M:{name:"Perfekcyjny Melancholik",sub:"Doradca ekspercki i systematyczny",
+     col:"#1D5490",bg:"#EBF2FB",tags:["Introweryk","Zadaniowy","Analityczny"],ltr:"M",
+     quote:"Twoja siła to głęboka wiedza, precyzja i rzetelność. Architekci i deweloperzy ufają Ci bezgranicznie — bo nigdy nie powiesz czegoś, czego nie jesteś pewien/pewna. Pamiętaj, że nie każdy klient potrzebuje pełnej specyfikacji technicznej.",
+     str:[
+       {lbl:"Dajesz klientowi",items:["Ekspercką wiedzę","Precyzyjne zestawienia","Wiarygodność i rzetelność","Systemowe podejście"]},
+       {lbl:"Twój język",items:["„Dokładnie to sprawdzę."","„Mam szczegółowe porównanie."","„Warto zwrócić uwagę na…"","Merytoryczny i precyzyjny"]}
+     ],
+     dev:["Ćwicz narrację emocjonalną — Klient Indywidualny kupuje uczuciem","Nie każda rozmowa musi być wyczerpującym briefingiem — skracaj","Przy Sangwiniku i Flegmatyku: zacznij od emocji, dane daj potem","Follow-up nie musi być perfekcyjny żeby być wartościowy — wyślij"],
+     nat:"Niebieski Melancholik, Architekt, Deweloper — cenią ekspertyzę i precyzję",
+     chal:"Towarzyski Sangwinik — potrzebuje energii i opowieści, nie dokumentacji"}
+};
+
+var cur=0,ans=[];
+var ltrs=['A','B','C','D'];
+var tnames={C:'Choleryk',S:'Sangwinik',F:'Flegmatyk',M:'Melancholik'};
+
+function show(id){
+  var ss=document.querySelectorAll('.screen');
+  for(var i=0;i<ss.length;i++) ss[i].classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startTest(){
+  ans=[];
+  for(var i=0;i<Q.length;i++) ans.push(null);
+  cur=0;
+  show('sq');
+  renderQ();
+}
+
+function renderQ(){
+  var q=Q[cur];
+  document.getElementById('qct').textContent=(cur+1)+' / '+Q.length;
+  document.getElementById('prog').style.width=Math.round(cur/Q.length*100)+'%';
+  document.getElementById('btn-back').disabled=(cur===0);
+  var nb=document.getElementById('btn-next');
+  nb.disabled=(ans[cur]===null);
+  nb.textContent=(cur===Q.length-1)?'Zobacz swój profil':'Następne pytanie';
+
+  var html='<div class="qtag a">📍 '+q.s+'</div>';
+  html+='<div class="qtext a a1">'+q.t+'</div>';
+  html+='<div class="opts a a2">';
+  for(var i=0;i<q.o.length;i++){
+    var sel=(ans[cur]===i);
+    html+='<div class="opt'+(sel?' s'+q.o[i].y:'')+'" onclick="pick('+i+',\''+q.o[i].y+'\')">'+
+          '<div class="oltr">'+ltrs[i]+'</div>'+
+          '<div>'+q.o[i].t+'</div></div>';
+  }
+  html+='</div>';
+  document.getElementById('qbody').innerHTML=html;
+}
+
+function pick(i,y){
+  ans[cur]=i;
+  var q=Q[cur];
+  var opts=document.querySelectorAll('.opt');
+  for(var k=0;k<opts.length;k++){
+    opts[k].className='opt'+(k===i?' s'+y:'');
+  }
+  document.getElementById('btn-next').disabled=false;
+  document.getElementById('btn-next').textContent=(cur===Q.length-1)?'Zobacz swój profil':'Następne pytanie';
+}
+
+function nextQ(){
+  if(ans[cur]===null) return;
+  if(cur===Q.length-1){calcResult();return;}
+  cur++;
+  renderQ();
+  document.getElementById('qbody').scrollTop=0;
+}
+
+function prevQ(){
+  if(cur===0) return;
+  cur--;
+  renderQ();
+}
+
+function calcResult(){
+  show('sl');
+  setTimeout(buildResult,1400);
+}
+
+function buildResult(){
+  var counts={C:0,S:0,F:0,M:0};
+  for(var i=0;i<Q.length;i++){
+    if(ans[i]!==null) counts[Q[i].o[ans[i]].y]++;
+  }
+  var sorted=[['C',counts.C],['S',counts.S],['F',counts.F],['M',counts.M]];
+  sorted.sort(function(a,b){return b[1]-a[1];});
+  var top=sorted[0][0];
+  var T=TYPES[top];
+  var total=Q.length;
+
+  // bars
+  var barsHtml='';
+  for(var i=0;i<sorted.length;i++){
+    var key=sorted[i][0],val=sorted[i][1];
+    var pct=Math.round(val/total*100);
+    var tc=TYPES[key].col;
+    barsHtml+='<div class="brow">'+
+      '<div class="bhead">'+
+        '<span class="bname" style="color:'+tc+'">'+tnames[key]+'</span>'+
+        '<span class="bpct">'+val+'/'+total+' · '+pct+'%</span>'+
+      '</div>'+
+      '<div class="bbg"><div class="bfill" style="background:'+tc+'" data-w="'+pct+'"></div></div>'+
+    '</div>';
+  }
+
+  // strengths
+  var strHtml='';
+  for(var i=0;i<T.str.length;i++){
+    var s=T.str[i];
+    var items='';
+    for(var j=0;j<s.items.length;j++) items+='<div class="sitem">'+s.items[j]+'</div>';
+    strHtml+='<div class="scard"><div class="slbl" style="color:'+T.col+'">'+s.lbl+'</div>'+items+'</div>';
+  }
+
+  // dev
+  var devHtml='';
+  for(var i=0;i<T.dev.length;i++){
+    devHtml+='<div class="ditem"><span class="darrow">→</span><span>'+T.dev[i]+'</span></div>';
+  }
+
+  // tags
+  var tagsHtml='';
+  for(var i=0;i<T.tags.length;i++){
+    tagsHtml+='<span class="rtag" style="background:'+T.col+'18;color:'+T.col+';border:1px solid '+T.col+'28">'+T.tags[i]+'</span>';
+  }
+
+  document.getElementById('sr').innerHTML=
+    '<div class="rhero a" style="background:'+T.bg+'">'+
+      '<div class="riconw" style="background:'+T.col+'"><div class="ricon">'+T.ltr+'</div></div>'+
+      '<div class="reyebrow a">Twój styl doradcy</div>'+
+      '<div class="rname a a1">'+T.name+'</div>'+
+      '<div class="rsub a a2">'+T.sub+'</div>'+
+      '<div class="rtags a a3">'+tagsHtml+'</div>'+
+    '</div>'+
+
+    '<div class="rsec a a2">'+
+      '<div class="stitle">Rozkład wyników</div>'+
+      '<div class="blist">'+barsHtml+'</div>'+
+    '</div>'+
+
+    '<div class="rsec a a3">'+
+      '<div class="stitle">Twój profil doradcy</div>'+
+      '<div class="qcard"><div class="qmark">"</div><div class="qtext2">'+T.quote+'</div></div>'+
+    '</div>'+
+
+    '<div class="rsec a a4">'+
+      '<div class="stitle">Mocne strony w showroomie</div>'+
+      '<div class="sgrid">'+strHtml+'</div>'+
+    '</div>'+
+
+    '<div class="rsec">'+
+      '<div class="stitle">Co warto ćwiczyć</div>'+
+      '<div class="dlist">'+devHtml+'</div>'+
+    '</div>'+
+
+    '<div class="rsec">'+
+      '<div class="stitle">Dopasowanie do klienta</div>'+
+      '<div class="cgrid">'+
+        '<div class="ccard" style="background:'+T.col+'10;border:1px solid '+T.col+'22">'+
+          '<div class="cclbl" style="color:'+T.col+'">Twój naturalny klient</div>'+
+          '<div class="cctext">'+T.nat+'</div>'+
+        '</div>'+
+        '<div class="ccard" style="background:#FFF3F3;border:1px solid #ECC">'+
+          '<div class="cclbl" style="color:#B33">Klient — wyzwanie</div>'+
+          '<div class="cctext">'+T.chal+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="ract">'+
+      '<button class="abtn" style="background:'+T.col+';color:white" onclick="shareRes(\''+top+'\')">Pokaż wynik trenerowi</button>'+
+      '<button class="abtn abtn-sec" onclick="resetTest()">Zrób test jeszcze raz</button>'+
+    '</div>';
+
+  show('sr');
+
+  // animate bars
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      var fills=document.querySelectorAll('.bfill');
+      for(var i=0;i<fills.length;i++){
+        fills[i].style.width=fills[i].getAttribute('data-w')+'%';
+      }
+    });
+  });
+}
+
+function shareRes(type){
+  var names={C:'Władczy Choleryk',S:'Towarzyski Sangwinik',F:'Spokojny Flegmatyk',M:'Perfekcyjny Melancholik'};
+  var txt='Mój styl doradcy: '+names[type]+' — test PCE OMNIRES';
+  if(navigator.share){
+    navigator.share({title:'Mój styl doradcy',text:txt});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){alert('Skopiowano! Pokaż trenerowi.');});
+  } else {
+    alert('Twój wynik:\n'+txt);
+  }
+}
+
+function resetTest(){
+  ans=[];cur=0;
+  show('si');
+}
+</script>
+</body>
+</html>
